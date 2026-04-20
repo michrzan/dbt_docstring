@@ -9,6 +9,9 @@ logger = logging.getLogger(__name__)
 COMMAND = "dbt_docstring"
 DBT_BLOCK_START_KEY = "```dbt"
 KEY_ORDER = ['name', 'label', 'enabled', 'description', 'meta', 'docs', 'latest_version', 'deprecation_date', 'access', 'config', 'constraints', 'tests', 'data_test', 'unit_tests', 'columns']
+LD_SPECIFIC_FIELDS = ['order_fields_by', 'group_label', 'metrics', 'joins']
+LD_SPECIFIC_FIELDS = [k for k in LD_SPECIFIC_FIELDS if k not in KEY_ORDER] #ensure no duplicates
+KEY_ORDER = LD_SPECIFIC_FIELDS + KEY_ORDER
 
 def sort_dict(d, keys=KEY_ORDER):
     """
